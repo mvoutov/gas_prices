@@ -22,7 +22,7 @@ table = soup.find('table', id='sortable')
 # Get today's date
 today = datetime.today()
 
-# Get today's date in a string format suitable for file naming
+# Get today's date in a string format
 date_string = today.strftime("%Y-%m-%d")
 
 # Initialize a list to store all gas prices
@@ -50,10 +50,8 @@ for row in table.find('tbody').find_all('tr'):
         today.strftime("%d"),   # Day
         today.strftime("%m"),   # Month
         today.strftime("%Y"),    # Year
-        date_string
+        date_string #Date to track which date has been already appended
     ])
-
-
 
 # Define the filename for today's data
 todays_filename = f'gas_prices_daily_csv/gas_prices_{date_string}.csv'
@@ -66,15 +64,8 @@ with open(todays_filename, 'w', newline='', encoding='utf-8') as file:
 
 print(f"Today's gas prices data saved to {todays_filename}")
 
-# Now append today's data to the master CSV file
+# Append today's data to the master CSV file
 master_filename = 'gas_prices.csv'
-
-# # Open the master file in append mode and write today's data
-# with open(master_filename, 'a', newline='', encoding='utf-8') as master_file:
-#     writer = csv.writer(master_file)
-#     writer.writerows(gas_prices)
-
-# print(f"Today's gas prices data appended to {master_filename}")
 
 # Check if today's data is already in the master file
 already_recorded = False
